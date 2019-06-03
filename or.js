@@ -30,13 +30,13 @@ module.exports = function(RED) {
 
             node.context.dict[id] = node.parsePayload(msg.payload);
 
-            var ret = true;
+            var ret = false;
 
             var keys = Object.keys(node.context.dict);
 
             keys.forEach(function(key){
                 var val = node.context.dict[key];
-                ret = ret && val;
+                ret = ret || val;
             });
 
             node.status({fill : ret ? "green" : "red",
@@ -51,5 +51,6 @@ module.exports = function(RED) {
         });
     }
 
-    RED.nodes.registerType("and", AndNode);
+    RED.nodes.registerType("or", AndNode);
+
 }

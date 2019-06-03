@@ -1,22 +1,22 @@
 <script type="text/javascript">
-    RED.nodes.registerType('and',{
+    RED.nodes.registerType('or',{
         category: 'function',
         color: '#a6bbcf',
         defaults: {
-            name: { value : "And Gate" },
-            topic: { value : "AndGate" },
+            name: { value : "Or Gate" },
+            topic: { value : "OrGate" },
             identifier: { value : "topic" }
         },
         inputs:1,
         outputs:1,
-        icon: "arrow-in.png",
+        icon: "inject.png",
         label: function() {
-            return this.name || "and";
+            return this.name || "or";
         }
     });
 </script>
 
-<script type="text/x-red" data-template-name="and">
+<script type="text/x-red" data-template-name="or">
     <div class="form-row">
         <label for="node-input-name"><i class="icon-tag"></i> Name</label>
         <input type="text" id="node-input-name" placeholder="Name">
@@ -33,9 +33,9 @@
     </div>
 </script>
 
-<script type="text/x-red" data-help-name="and">
+<script type="text/x-red" data-help-name="or">
     <p>
-        A simple node that will perform 'and' operation on all boolean or boolean equivalent messages received. Input messages from seperate nodes 
+        A simple node that will perform 'or' operation on all boolean or boolean equivalent messages received. Input messages from seperate nodes 
         must have a unique topic in order for the node to distinguish its source.
     </p>
 </script>

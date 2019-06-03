@@ -6,7 +6,8 @@
 "license": "ISC",
     "node-red" : {
         "nodes": {
-            "simply-boolean-and": "and.js"
+            "and": "and.js",
+            "or": "or.js"
         }
     }
 }
