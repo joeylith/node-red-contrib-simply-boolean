@@ -7,6 +7,7 @@
     "node-red" : {
         "nodes": {
             "and": "and.js",
+	    "not": "not.js",
             "or": "or.js"
         }
     }

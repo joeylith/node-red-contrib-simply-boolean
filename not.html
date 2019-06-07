@@ -1,0 +1,40 @@
+<script type="text/javascript">
+    RED.nodes.registerType('not',{
+        category: 'function',
+        color: '#a6bbcf',
+        defaults: {
+            name: { value : "Not Gate" },
+            topic: { value : "NotGate" },
+            identifier: { value : "topic" }
+        },
+        inputs:1,
+        outputs:1,
+        icon: "inject.png",
+        label: function() {
+            return this.name || "not";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="not">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-identifier"><i class="fa fa-question-circle"></i> Identifier</label>
+        <input type="text" id="node-input-identifier">
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-topic"><i class="icon-tasks"></i> Output Topic</label>
+        <input type="text" id="node-input-topic">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="not">
+    <p>
+        A simple node that will perform 'not' operation on all boolean or boolean equivalent messages received.
+    </p>
+</script>
