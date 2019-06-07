@@ -6,7 +6,6 @@ module.exports = function(RED) {
         var node = this;
     
         node.topic = config.topic;
-        node.identifier = config.identifier;
 
         node.parsePayload = function(payload) {
             if (typeof payload === 'boolean') return payload;
@@ -24,6 +23,7 @@ module.exports = function(RED) {
                          shape : ret ? "dot" : "ring",
                          text : ret ? "True" : "False"});
 
+            msg.topic = (node.topic || "") + msg.topic;
             msg.payload = ret;
 
             node.send(msg);
