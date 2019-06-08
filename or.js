@@ -1,6 +1,6 @@
 module.exports = function(RED) {
 
-    function AndNode(config) {
+    function OrNode(config) {
         RED.nodes.createNode(this, config);
 
         var node = this;
@@ -18,24 +18,26 @@ module.exports = function(RED) {
         }
 
         node.on('input', function(msg) {
+            var context = this.context();
+
             if (msg.topic == 'reset' && msg.payload == 'reset') {
-                node.context.dict = {};
+                context.dict = {};
                 return;
             }
 
-            node.context.dict = node.context.dict || {};
+            context.dict = context.dict || {};
 
             var id = msg[node.identifier];
             id = id || 'IdNotFound';
 
-            node.context.dict[id] = node.parsePayload(msg.payload);
+            context.dict[id] = node.parsePayload(msg.payload);
 
             var ret = false;
 
-            var keys = Object.keys(node.context.dict);
+            var keys = Object.keys(context.dict);
 
             keys.forEach(function(key){
-                var val = node.context.dict[key];
+                var val = context.dict[key];
                 ret = ret || val;
             });
 
@@ -46,11 +48,11 @@ module.exports = function(RED) {
             node.send({
                 topic: node.topic,
                 payload: ret,
-                debug: node.context.dict
+                debug: context.dict
             });
         });
     }
 
-    RED.nodes.registerType("or", AndNode);
+    RED.nodes.registerType("or", OrNode);
 
 }

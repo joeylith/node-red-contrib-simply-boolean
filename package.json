@@ -1,13 +1,13 @@
 {
-"name": "node-red-contrib-simply-boolean",
-"version": "1.0.0",
-"description": "And-gate, Or-gate, Not-gate nodes that will work with mqtt or Openhab2 related flows",
-"author": "Joseph Goncalves",
-"license": "ISC",
+    "name": "node-red-contrib-simply-boolean",
+    "version": "1.0.0",
+    "description": "And-gate, Or-gate, Not-gate nodes that will work with mqtt or Openhab2 related flows",
+    "author": "Joseph Goncalves",
+    "license": "ISC",
     "node-red" : {
         "nodes": {
             "and": "and.js",
-	    "not": "not.js",
+            "not": "not.js",
             "or": "or.js"
         }
     }

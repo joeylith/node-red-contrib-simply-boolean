@@ -1,6 +1,6 @@
 module.exports = function(RED) {
 
-    function AndNode(config) {
+    function NotNode(config) {
         RED.nodes.createNode(this, config);
 
         var node = this;
@@ -30,6 +30,6 @@ module.exports = function(RED) {
         });
     }
 
-    RED.nodes.registerType("not", AndNode);
+    RED.nodes.registerType("not", NotNode);
 
 }
