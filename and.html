@@ -5,7 +5,8 @@
         defaults: {
             name: { value : "And Gate" },
             topic: { value : "AndGate" },
-            identifier: { value : "topic" }
+            identifier: { value : "topic", required: true },
+            minitems: { value : "1", required: true, validate: RED.validators.regex(/[0-9]+/) }
         },
         inputs:1,
         outputs:1,
@@ -30,6 +31,11 @@
     <div class="form-row">
         <label for="node-input-topic"><i class="icon-tasks"></i> Output Topic</label>
         <input type="text" id="node-input-topic">
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-minitems"><i class="icon-tasks"></i> Min items</label>
+        <input type="text" id="node-input-minitems">
     </div>
 </script>
 

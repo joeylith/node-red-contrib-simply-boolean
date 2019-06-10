@@ -5,9 +5,6 @@ module.exports = function(RED) {
 
         var node = this;
     
-        node.topic = config.topic;
-        node.identifier = config.identifier;
-
         node.parsePayload = function(payload) {
             if (typeof payload === 'boolean') return payload;
 
@@ -27,7 +24,8 @@ module.exports = function(RED) {
 
             context.dict = context.dict || {};
 
-            var id = msg[node.identifier];
+            var id = msg[config.identifier];
+
             id = id || 'IdNotFound';
 
             context.dict[id] = node.parsePayload(msg.payload);
@@ -35,6 +33,8 @@ module.exports = function(RED) {
             var ret = true;
 
             var keys = Object.keys(context.dict);
+
+            if (keys.length < config.minitems) return;
 
             keys.forEach(function(key){
                 var val = context.dict[key];
@@ -46,7 +46,7 @@ module.exports = function(RED) {
                          text : ret ? "True" : "False"});
 
             node.send({
-                topic: node.topic,
+                topic: config.topic,
                 payload: ret,
                 debug: context.dict
             });
