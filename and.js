@@ -34,7 +34,7 @@ module.exports = function(RED) {
 
             if (isNaN(config.minitems) || keys.length < config.minitems) return;
 
-            var ret = keys.reduce((r,k) => r && context.dict[k], true);
+            var ret = keys.every((k) => context.dict[k]);
 
             var status = {fill : ret ? "green" : "red",
                          shape : "dot",
