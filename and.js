@@ -30,16 +30,11 @@ module.exports = function(RED) {
 
             context.dict[id] = node.parsePayload(msg.payload);
 
-            var ret = true;
-
             var keys = Object.keys(context.dict);
 
             if (isNaN(config.minitems) || keys.length < config.minitems) return;
 
-            keys.forEach(function(key){
-                var val = context.dict[key];
-                ret = ret && val;
-            });
+            var ret = keys.reduce((r,k) => r && context.dict[k], true);
 
             var status = {fill : ret ? "green" : "red",
                          shape : "dot",
