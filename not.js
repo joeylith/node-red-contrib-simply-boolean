@@ -19,11 +19,26 @@ module.exports = function(RED) {
         node.on('input', function(msg) {
             var ret = ! node.parsePayload(msg.payload);
 
-            node.status({fill : ret ? "green" : "red",
-                         shape : ret ? "dot" : "ring",
-                         text : ret ? "True" : "False"});
+            var status = {fill : ret ? "green" : "red",
+                         shape : "dot",
+                         text : ret ? "True" : "False"};
 
-            msg.topic = (node.topic || "") + msg.topic;
+            node.status(status);
+
+            var context = this.context();
+
+            if (context.timer) clearTimeout(context.timer);
+
+            context.timer =
+                setTimeout(function() {
+                    node.status({
+                        fill: status.fill,
+                        text: status.text,
+                        shape: "ring"
+                    });
+                }, 30000);
+
+            msg.topic = node.topic + msg.topic;
             msg.payload = ret;
 
             node.send(msg);

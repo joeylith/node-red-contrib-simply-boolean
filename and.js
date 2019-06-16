@@ -34,16 +34,29 @@ module.exports = function(RED) {
 
             var keys = Object.keys(context.dict);
 
-            if (keys.length < config.minitems) return;
+            if (isNaN(config.minitems) || keys.length < config.minitems) return;
 
             keys.forEach(function(key){
                 var val = context.dict[key];
                 ret = ret && val;
             });
 
-            node.status({fill : ret ? "green" : "red",
-                         shape : ret ? "dot" : "ring",
-                         text : ret ? "True" : "False"});
+            var status = {fill : ret ? "green" : "red",
+                         shape : "dot",
+                         text : ret ? "True" : "False"};
+
+            node.status(status);
+
+            if (context.timer) clearTimeout(context.timer);
+
+            context.timer =
+                setTimeout(function() {
+                    node.status({
+                        fill: status.fill,
+                        text: status.text,
+                        shape: "ring"
+                    });
+                }, 30000);
 
             node.send({
                 topic: config.topic,

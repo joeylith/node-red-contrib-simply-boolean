@@ -6,7 +6,7 @@
             name: { value : "And Gate" },
             topic: { value : "AndGate" },
             identifier: { value : "topic", required: true },
-            minitems: { value : "1", required: true, validate: RED.validators.regex(/[0-9]+/) }
+            minitems: { value : "1", validate: RED.validators.regex(/^[0-9]*$/) }
         },
         inputs:1,
         outputs:1,
