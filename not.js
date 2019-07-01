@@ -7,14 +7,7 @@ module.exports = function(RED) {
     
         node.topic = config.topic;
 
-        node.parsePayload = function(payload) {
-            if (typeof payload === 'boolean') return payload;
-
-            switch(payload.toLowerCase().trim()) {
-                case "off": case "false": case "no": case "0": case "": return false; 
-                default: return true;
-            }
-        }
+        node.parsePayload = require('./parse-payload.js');
 
         node.on('input', function(msg) {
             var ret = ! node.parsePayload(msg.payload);

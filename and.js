@@ -5,14 +5,7 @@ module.exports = function(RED) {
 
         var node = this;
     
-        node.parsePayload = function(payload) {
-            if (typeof payload === 'boolean') return payload;
-
-            switch(payload.toLowerCase().trim()) {
-                case "off": case "false": case "no": case "0": case "": return false; 
-                default: return true;
-            }
-        }
+        node.parsePayload = require('./parse-payload.js');
 
         node.on('input', function(msg) {
             var context = this.context();
