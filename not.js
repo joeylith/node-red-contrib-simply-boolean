@@ -22,6 +22,8 @@ module.exports = function(RED) {
 
             if (context.timer) clearTimeout(context.timer);
 
+            context.flow.ringstatus_timeout = context.flow.ringstatus_timeout || 120000;
+
             context.timer =
                 setTimeout(function() {
                     node.status({
@@ -29,7 +31,7 @@ module.exports = function(RED) {
                         text: status.text,
                         shape: "ring"
                     });
-                }, 30000);
+                }, context.flow.ringstatus_timeout);
 
             msg.topic = node.topic + msg.topic;
             msg.payload = ret;
